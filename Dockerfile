@@ -21,4 +21,4 @@ ADD . /var/www
 RUN mkdir /var/www/data
 VOLUME /var/www/data
 
-ENTRYPOINT exec php unifi-alerts-daemon.php
+CMD php unifi-alerts-daemon.php
