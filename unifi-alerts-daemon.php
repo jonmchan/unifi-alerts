@@ -81,6 +81,7 @@ if ($serialized_data === false) {
 }
 
 while(true) {
+  echo "Polling unifi controller for hosts...\n";
   $results = $unifi_connection->list_clients(); // returns a PHP array containing alarm objects
   if(!is_array($results)) {
     exit("Results returning bad data...");
@@ -89,6 +90,7 @@ while(true) {
     if (isset($known_hosts[$client->mac])) {
       continue;
     }
+    echo "New host found - $client->mac - ($client->hostname) - sending email!\n";
     $known_hosts[$client->mac] = $client;
 
     $mail->Subject = "Never Seen $client->mac - ($client->hostname) connecting to $client->essid";
@@ -104,6 +106,5 @@ while(true) {
   file_put_contents('data/hosts',serialize($known_hosts));
 
   sleep(15);
-  echo "polling again...\n";
 }
 ?>
