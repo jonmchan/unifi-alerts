@@ -2,6 +2,59 @@
 
 This simple script monitors the unifi controller for new hosts. When a new host is found, it emits an email alerting you that a new host is on the network.
 
+```
+To: jonmchan@myhost.com
+From: unifi-monitor@mynetwork.com
+Subject: Never Seen 14:10:9f:xx:xx:xx - (jchanmbp) connecting to JJ
+
+Full Info: {
+    "1x_identity": "jonathan",
+    "_id": "abcdefghijklmnopqrstuvwxyz",
+    "_is_guest_by_uap": false,
+    "_last_seen_by_uap": 1524349895,
+    "_uptime_by_uap": 2473,
+    "ap_mac": "f0:9f:c2:xx:xx:xx",
+    "assoc_time": 1524347422,
+    "authorized": true,
+    "bssid": "02:9f:c2:xx:xx:xx",
+    "bytes-r": 3730,
+    "ccq": 333,
+    "channel": 153,
+    "essid": "MyNet",
+    "first_seen": 1523998057,
+    "hostname": "jchanmbp",
+    "idletime": 0,
+    "ip": "192.168.0.22",
+    "is_11r": false,
+    "is_guest": false,
+    "is_wired": false,
+    "last_seen": 1524349895,
+    "latest_assoc_time": 1524347423,
+    "mac": "14:10:9f:xx:x:xx",
+    "noise": -105,
+    "oui": "Apple",
+    "powersave_enabled": false,
+    "qos_policy_applied": true,
+    "radio": "na",
+    "radio_proto": "na",
+    "rssi": 43,
+    "rx_bytes": 6713081,
+    "rx_bytes-r": 1768,
+    "rx_packets": 40391,
+    "rx_rate": 300000,
+    "signal": -62,
+    "site_id": "5ad63ccee4babababa",
+    "tx_bytes": 17429567,
+    "tx_bytes-r": 1962,
+    "tx_packets": 37897,
+    "tx_power": 44,
+    "tx_rate": 243000,
+    "uptime": 2473,
+    "user_id": "abcdefghijklmnopqrstuvwxyz",
+    "vlan": 0
+}
+```
+
 **NOTE:** This script can be easily circumvented by a careful bad agent. If the bad agent spoofs a mac address already associated with your access point, no alert will be emitted. This is only intended for casual alerting of new hosts on the network.
 
 ## Usage
@@ -42,8 +95,6 @@ Polling unifi controller for hosts...
 Polling unifi controller for hosts...
 Polling unifi controller for hosts...
 ```
-
-And you should receive emails like
 
 ### Running Standalone
 
