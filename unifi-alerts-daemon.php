@@ -18,12 +18,13 @@ $smtp_pass = getenv('SMTP_PASS');
 $smtp_from = getenv('SMTP_FROM');
 $smtp_to = getenv('SMTP_TO');
 
-if(filter_var(getenv('SMTP_TLS'),FILTER_VALIDATE_BOOLEAN) {
+if(filter_var(getenv('SMTP_TLS'),FILTER_VALIDATE_BOOLEAN)) {
   $smtp_tls = true;
   $smtp_secure = 'tls';
 } else {
   $smtp_tls = false;
   $smtp_secure = false;
+}
 if (filter_var(getenv('SMTPDEBUG'),FILTER_VALIDATE_BOOLEAN)) {
   $smtpdebug = 2;
 } else {
