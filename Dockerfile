@@ -10,8 +10,10 @@ ENV SMTP_HOST localhost
 ENV SMTP_PORT 25
 #ENV SMTP_USER
 #ENV SMTP_PASS
-ENV SMTP_FROM unifi_alerts@unifi.hostname
-ENV SMTP_TO you@somewhere.com
+ENV FROM_EMAIL unifi_alerts@unifi.hostname
+#ENV FROM_NAME R2D2
+ENV TO_EMAIL you@somewhere.com
+#ENV TO_NAME Your Name
 
 ADD composer.json /var/www
 RUN composer install

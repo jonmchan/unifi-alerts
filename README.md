@@ -5,7 +5,7 @@ This simple script monitors the unifi controller for new hosts. When a new host 
 ```
 To: jonmchan@myhost.com
 From: unifi-monitor@mynetwork.com
-Subject: Never Seen 14:10:9f:xx:xx:xx - (jchanmbp) connecting to JJ
+Subject: Never Seen 14:10:9f:xx:xx:xx - (jchanmbp) connecting to MyNet
 
 Full Info: {
     "1x_identity": "jonathan",
@@ -75,8 +75,10 @@ $ docker run --name unifi-alerts \
     -e SMTP_PORT=25 \
     -e SMTP_USER=user `# remove this if your smtp has no auth` \
     -e SMTP_PASS=pass `# remove this if your smtp has no auth` \
-    -e SMTP_FROM=unifi_alerts@unifi.yours.local \
-    -e SMTP_TO=you@youraddress.com \
+    -e FROM_EMAIL=unifi_alerts@unifi.yours.local \
+    -e FROM_NAME="Unifi Alerter" `# this is optional` \
+    -e TO_EMAIL=you@youraddress.com \
+    -e TO_NAME="YOUR NAME" `# this is optional` \
     -d jonmchan/unifi-alerts 
 ```
 

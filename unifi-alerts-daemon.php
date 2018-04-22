@@ -15,15 +15,17 @@ $smtp_server = getenv('SMTP_HOST') ? getenv('SMTP_HOST') : 'localhost' ;
 $smtp_port = getenv('SMTP_PORT') ? getenv('SMTP_PORT') : 25;
 $smtp_user = getenv('SMTP_USER');
 $smtp_pass = getenv('SMTP_PASS');
-$smtp_from = getenv('SMTP_FROM');
-$smtp_to = getenv('SMTP_TO');
+$from_email = getenv('FROM_EMAIL');
+$from_name = getenv('FROM_NAME') ? getenv('FROM_NAME') : 'Unifi Alerts';
+$to_email = getenv('TO_EMAIL');
+$to_name = getenv('TO_NAME') ? GETENV('TO_NAME') : 'Unifi Administrator';
 
 if(filter_var(getenv('SMTP_TLS'),FILTER_VALIDATE_BOOLEAN)) {
   $smtp_tls = true;
   $smtp_secure = 'tls';
 } else {
   $smtp_tls = false;
-  $smtp_secure = false;
+  $smtp_secure = '';
 }
 if (filter_var(getenv('SMTPDEBUG'),FILTER_VALIDATE_BOOLEAN)) {
   $smtpdebug = 2;
@@ -53,8 +55,8 @@ try {
     $mail->Port = $smtp_port;                                    // TCP port to connect to
 
     //Recipients
-    $mail->setFrom($smtp_from);
-    $mail->addAddress($smtp_to);     // Add a recipient
+    $mail->setFrom($from_email, $from_name);
+    $mail->addAddress($to_email, $to_name);     // Add a recipient
 
     //Content
     $mail->isHTML(false);                                  // Set email format to HTML
