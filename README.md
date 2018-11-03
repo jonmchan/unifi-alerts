@@ -79,6 +79,8 @@ $ docker run --name unifi-alerts \
     -e FROM_NAME="Unifi Alerter" `# this is optional` \
     -e TO_EMAIL=you@youraddress.com \
     -e TO_NAME="YOUR NAME" `# this is optional` \
+    -e DAILY_AP_RESTART_TIME=07:30 `# this is optional; when set, enables restart of AP at specified time in UTC`
+    -e DAILY_AP_RESTART_MAC=f0:9f:c2:00:00:00 `# this is optional; when set, specifies which AP to restart identified by mac addr`
     -d jonmchan/unifi-alerts 
 ```
 
@@ -97,6 +99,8 @@ Polling unifi controller for hosts...
 Polling unifi controller for hosts...
 Polling unifi controller for hosts...
 ```
+
+Added an optional environment variable ```DAILY_AP_RESTART_TIME```. When set, it sends a restart to unifi at the specified time. My AP was acting flaky, hoping restarting it nightly will help.
 
 ### Running Standalone
 

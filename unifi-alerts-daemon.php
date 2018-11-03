@@ -19,6 +19,11 @@ $from_email = getenv('FROM_EMAIL');
 $from_name = getenv('FROM_NAME') ? getenv('FROM_NAME') : 'Unifi Alerts';
 $to_email = getenv('TO_EMAIL');
 $to_name = getenv('TO_NAME') ? GETENV('TO_NAME') : 'Unifi Administrator';
+$daily_reset_time = getenv('DAILY_AP_RESTART_TIME');
+$daily_reset_ap_mac = getenv('DAILY_AP_RESTART_MAC');
+
+
+$last_day_reset = -1;
 
 if(filter_var(getenv('SMTP_TLS'),FILTER_VALIDATE_BOOLEAN)) {
   $smtp_tls = true;
@@ -106,6 +111,14 @@ while(true) {
   }
 
   file_put_contents('data/hosts',serialize($known_hosts));
+
+  if (!(empty($daily_reset_time) || empty($daily_reset_ap_mac)) && $daily_reset_time == date("H:i")) {
+    if($last_day_reset != date('d')) {
+      echo "Daily reset of AP enabled to $daily_reset_time which is now - resetting AP - $daily_reset_ap_mac";
+      $last_day_reset = date('d');
+      $unifi_connection->restart_ap($daily_reset_ap_mac);
+    }
+  }
 
   sleep(15);
 }
